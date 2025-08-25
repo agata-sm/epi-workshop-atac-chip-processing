@@ -27,7 +27,7 @@ process TRIM_READS_PE {
     def args = task.ext.args ?: ''
 
     """
-    cutadapt -j ${task.cpus} ${args} \
+    cutadapt -j ${task.cpus} ${args} -a ${params.adapter} -A ${params.adapter}\
     -o ${pair_id}.trimmed_1.fastq.gz -p ${pair_id}.trimmed_2.fastq.gz $reads >${pair_id}.cutadapt_trim.log 2>&1
  
     echo "Software versions for atac-chip-processing.nf" >${params.verfile}
