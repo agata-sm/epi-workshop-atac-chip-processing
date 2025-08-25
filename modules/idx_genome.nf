@@ -9,8 +9,11 @@ params.verfile="software.versions"
 
 process IDX_GENOME {
 
-	label 'genome_idx'
-	label 'mid_mem'
+	label 'error_retry'
+	label 'process_medium'
+	
+
+	container = 'https://depot.galaxyproject.org/singularity/mulled-v2-ac74a7f02cebcfcc07d8e8d1d750af9c83b4d45a:f70b31a2db15c023d641c32f433fb02cd04df5a6-0'
 
 	input:
     path genomeFasta

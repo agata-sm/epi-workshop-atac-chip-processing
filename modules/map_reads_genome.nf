@@ -8,7 +8,8 @@ params.verfile="software.versions"
 
 process MAP_READS_GENOME {
 
-    label 'big_mem'
+	label 'error_retry'
+    label 'process_high'
     cpus params.threads_bigmem
     scratch true
 

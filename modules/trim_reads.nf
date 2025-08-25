@@ -8,7 +8,9 @@ params.verfile="software.versions"
 
 process TRIM_READS_PE {
 
-    label 'mid_mem'
+    label 'process_medium'
+    label 'error_retry'
+
 
     container = 'https://depot.galaxyproject.org/singularity/cutadapt%3A5.1--py39hbcbf7aa_0'
 

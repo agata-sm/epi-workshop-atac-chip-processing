@@ -7,7 +7,7 @@ params.verfile="software.versions"
 
 process FASTQC_RAW {
 
-    label 'small'
+    label 'process_single'
 
     container = 'https://depot.galaxyproject.org/singularity/fastqc%3A0.12.1--hdfd78af_0'
 

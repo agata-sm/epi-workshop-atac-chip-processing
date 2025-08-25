@@ -9,7 +9,7 @@ params.verfile="software.versions"
 
 process FASTQC_TRIMMED {
 
-    label 'small'
+    label 'process_single'
 
     tag {smpl_id}
     container = 'https://depot.galaxyproject.org/singularity/fastqc%3A0.12.1--hdfd78af_0'
