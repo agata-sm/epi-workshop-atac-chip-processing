@@ -32,7 +32,7 @@ process TRIM_READS_PE {
  
     echo "Software versions for atac-chip-processing.nf" >${params.verfile}
     date >>${params.verfile}
-    echo "process ** trim_reads **" >>${params.verfile}
+    echo "process ** TRIM_READS_PE **" >>${params.verfile}
     cutadapt --version >>${params.verfile}
     """
 

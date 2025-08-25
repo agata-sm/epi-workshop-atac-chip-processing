@@ -29,7 +29,7 @@ process FASTQC_TRIMMED {
 
     echo "Software versions for atac-chip-processing.nf" >${params.verfile}
     date >>${params.verfile}
-    echo "process ** fastqc **" >>${params.verfile}
+    echo "process ** FASTQC_TRIMMED **" >>${params.verfile}
     fastqc -v >>${params.verfile}
     """
 
