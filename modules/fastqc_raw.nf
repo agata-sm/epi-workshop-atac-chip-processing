@@ -9,7 +9,8 @@ process FASTQC_RAW {
 
     label 'process_single'
 
-    container = 'fastqc%3A0.12.1--hdfd78af_0.img'
+    //container = 'fastqc%3A0.12.1--hdfd78af_0.img'
+    container = 'https://depot.galaxyproject.org/singularity/cutadapt%3A5.1--py39hbcbf7aa_0'
 
 
     input:
