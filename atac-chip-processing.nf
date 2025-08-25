@@ -97,6 +97,8 @@ workflow {
 
 	TRIM_READS_PE(read_pairs)
 
+	trimmed_reads_PE_ch=TRIM_READS_PE.out.trimmed_reads_ch
+
 	FASTQC_TRIMMED(trimmed_reads_PE_ch)
 
 	//index
