@@ -48,7 +48,7 @@ println ""
 // channels
 
 //fastq files channel for PE
-read_pairs = Channel.fromFilePairs(params.fastqdir, checkIfExists: true )
+read_pairs = Channel.fromFilePairs(params.fastqPE, checkIfExists: true )
 	read_pairs
 	    .view()
 	    .set { read_pairs }
@@ -56,7 +56,7 @@ read_pairs = Channel.fromFilePairs(params.fastqdir, checkIfExists: true )
 
 
 // fastq file paths channel - paths
-fastq_ch= Channel.fromPath(params.fastqdir , checkIfExists:true)
+fastq_ch= Channel.fromPath(params.fastq , checkIfExists:true)
 	fastq_ch
 	    .view()
 	    .set { fastq_ch }
