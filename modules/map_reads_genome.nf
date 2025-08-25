@@ -21,9 +21,11 @@ process MAP_READS_GENOME {
 
     input:
     tuple val(pair_id), path(r1), path(r2), path(idx_bowtie_ch)
+    path genomeFasta
+
 
     output:
-    tuple val(pair_id), path("${pair_id}.mapped.bowtie2.bam"), emit: mappedPE_ch
+    tuple val(pair_id), path("${pair_id}.sorted.bowtie2.bam"), path("${pair_id}.sorted.bowtie2.bam.bai"), emit: mappedPE_ch
 
     script:
 
@@ -31,7 +33,10 @@ process MAP_READS_GENOME {
 
 
     """
-    bowtie2 -p ${task.cpus} ${args} -x ${idx_bowtie_ch} -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam -
+    bowtie2 -p ${task.cpus} ${args} -x ${genomeFasta.baseName} -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
+    
+    samtools sort -T ${pair_id} -o ${pair_id}.sorted.bowtie2.bam
+    samtools index ${pair_id}.sorted.bowtie2.bam -o ${pair_id}.sorted.bowtie2.bam.bai
     """
 
 }
