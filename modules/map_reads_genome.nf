@@ -35,7 +35,7 @@ process MAP_READS_GENOME {
     """
     bowtie2 -p ${task.cpus} ${args} -x ${genomeFasta.baseName} -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
     
-    samtools sort -T ${pair_id} -o ${pair_id}.sorted.bowtie2.bam
+    samtools sort -T ${pair_id} -o ${pair_id}.sorted.bowtie2.bam ${pair_id}.mapped.bowtie2.bam
     samtools index ${pair_id}.sorted.bowtie2.bam -o ${pair_id}.sorted.bowtie2.bam.bai
     """
 
