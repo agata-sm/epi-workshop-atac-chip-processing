@@ -30,10 +30,10 @@ process IDX_GENOME {
     """
     ##gzip -d ${genomeFasta}
     
-    mkdir bowtie2
 
     bowtie2-build --threads ${task.cpus} ${args} -f ${genomeFasta} ${genomeFasta.baseName}
-
+    
+    #mkdir bowtie2
     #bowtie2-build --threads ${task.cpus} ${args} -f ${genomeFasta} bowtie2/${genomeFasta.baseName}
 
     echo "Software versions for atac-chip-processing.nf" >${params.verfile}

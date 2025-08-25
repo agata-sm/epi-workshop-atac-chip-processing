@@ -110,14 +110,14 @@ workflow {
 			.flatten()
 			.collect()
 			.map{[it]}
-			//.view()
+			.view()
 			.set{ idx_bowtie_ch }
 
 
 	map_readsPE_ch=TRIM_READS_PE.out.trimmed_reads_ch
 		map_readsPE_ch
 			.combine(idx_bowtie_ch)
-			//.view()
+			.view()
 			.set {map_readsPE_ch}
 
 
