@@ -1,0 +1,37 @@
+nextflow.enable.dsl=2
+params.local = ''
+
+
+// versions
+params.verfile="software.versions"
+
+
+process BAM_DEDUP {
+
+	label 'error_retry'
+    label 'process_medium'
+    tag "$pair_id" // Adds name to job submission instead of (1), (2) etc.
+
+    scratch true
+
+	container = 'https://depot.galaxyproject.org/singularity/picard%3A3.4.0--hdfd78af_0'
+
+    input:
+    tuple val(pair_id), path(mapped_bam), path(mapped_bam_idx)
+
+
+    output:
+    tuple val(pair_id), path("${pair_id}.bowtie2.dedup.bam"), path("${pair_id}.bowtie2.dedup_metrics"), emit: bam_dedup_ch
+
+    script:
+
+    def args = task.ext.args ?: ''
+
+
+    """
+    java -Xmx${task.memory.giga}g -jar picard.jar MarkDuplicates ${args} \
+     -I ${mapped_bam} \
+     -O ${pair_id}.bowtie2.dedup.bam -M ${pair_id}.bowtie2.dedup_metrics
+    """
+
+}

@@ -82,6 +82,7 @@ include { FASTQC_TRIMMED           } from "$projectDir/modules/fastqc_trimmed.nf
 include { IDX_GENOME            } from "$projectDir/modules/idx_genome.nf"
 include { MAP_READS_GENOME      } from "$projectDir/modules/map_reads_genome.nf"
 include { BAM_STATS            } from "$projectDir/modules/bam_stats.nf"
+include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
 
 
 
@@ -111,20 +112,28 @@ workflow {
 			.flatten()
 			.collect()
 			.map{[it]}
-			.view()
+			//.view()
 			.set{ idx_bowtie_ch }
 
 
 	map_readsPE_ch=TRIM_READS_PE.out.trimmed_reads_ch
 		map_readsPE_ch
 			.combine(idx_bowtie_ch)
-			.view()
+			//.view()
 			.set {map_readsPE_ch}
 
 
 	MAP_READS_GENOME(map_readsPE_ch, fa_ch)
 
 	BAM_STATS(MAP_READS_GENOME.out.mappedPE_ch)
+
+	//post processing
+
+	BAM_DEDUP(MAP_READS_GENOME.out.mappedPE_ch)
+
+	//bam_dedup_ch
+
+	// QC
 
 
 }
