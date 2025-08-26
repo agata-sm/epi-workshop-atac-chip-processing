@@ -11,7 +11,8 @@ process TRIM_READS_PE {
     label 'process_medium'
     label 'error_retry'
 
-
+	tag "$pair_id" // Adds name to job submission instead of (1), (2) etc.
+	
     container = 'https://depot.galaxyproject.org/singularity/cutadapt%3A5.1--py39hbcbf7aa_0'
 
 

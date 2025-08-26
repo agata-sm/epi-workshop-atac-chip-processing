@@ -84,7 +84,7 @@ include { MAP_READS_GENOME      } from "$projectDir/modules/map_reads_genome.nf"
 include { BAM_STATS            } from "$projectDir/modules/bam_stats.nf"
 include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
 
-
+//BAM_FILT_BLCK
 
 
 /////////////////////////////
@@ -109,9 +109,9 @@ workflow {
 	//read mapping
 	idx_bowtie_ch=IDX_GENOME.out.idx_bowtie_ch
 		idx_bowtie_ch
-			.flatten()
-			.collect()
-			.map{[it]}
+			//.flatten()
+			//.collect()
+			//.map{[it]}
 			//.view()
 			.set{ idx_bowtie_ch }
 
