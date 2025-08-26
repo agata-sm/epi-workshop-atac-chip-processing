@@ -118,12 +118,12 @@ workflow {
 
 	map_readsPE_ch=TRIM_READS_PE.out.trimmed_reads_ch
 		map_readsPE_ch
-			.combine(idx_bowtie_ch)
+			//.combine(idx_bowtie_ch)
 			//.view()
 			.set {map_readsPE_ch}
 
 
-	MAP_READS_GENOME(map_readsPE_ch, fa_ch)
+	MAP_READS_GENOME(map_readsPE_ch, idx_bowtie_ch, fa_ch)
 
 	BAM_STATS(MAP_READS_GENOME.out.mappedPE_ch)
 
