@@ -109,8 +109,8 @@ workflow {
 	//read mapping
 	idx_bowtie_ch=IDX_GENOME.out.idx_bowtie_ch
 		idx_bowtie_ch
-			.flatten()
-			.collect()
+			//.flatten()
+			//.collect()
 			//.map{[it]}
 			.view()
 			.set{ idx_bowtie_ch }
