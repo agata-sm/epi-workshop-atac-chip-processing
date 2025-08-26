@@ -14,7 +14,7 @@ process BAM_DEDUP {
 
     scratch true
 
-	container = 'https://depot.galaxyproject.org/singularity/picard%3A3.4.0--hdfd78af_0'
+	container = 'https://depot.galaxyproject.org/singularity/picard:3.1.1--hdfd78af_0'
 
     input:
     tuple val(pair_id), path(mapped_bam), path(mapped_bam_idx)
@@ -29,9 +29,17 @@ process BAM_DEDUP {
 
 
     """
-    java -Xmx${task.memory.giga}g -jar picard.jar MarkDuplicates ${args} \
-     -I ${mapped_bam} \
-     -O ${pair_id}.bowtie2.dedup.bam -M ${pair_id}.bowtie2.dedup_metrics
+    #java -Xmx${task.memory.giga}g -jar picard.jar MarkDuplicates ${args} \
+    # -I ${mapped_bam} \
+    # -O ${pair_id}.bowtie2.dedup.bam -M ${pair_id}.bowtie2.dedup_metrics
+    
+     picard \\
+        -Xmx${task.memory.giga}g \\
+        MarkDuplicates \\
+        ${args} \\
+        --INPUT ${mapped_bam} \\
+        --OUTPUT ${pair_id}.bowtie2.dedup.bam \\
+        --METRICS_FILE ${pair_id}.bowtie2.dedup_metrics
     """
 
 }
