@@ -112,7 +112,7 @@ workflow {
 	//genome index
 	IDX_GENOME(fa_ch)
 
-	//GENOME_BLACKLIST_REGIONS(fa_ch, IDX_GENOME.out.chromsizes_ch, blacklist_ch)
+	GENOME_BLACKLIST_REGIONS(fa_ch, IDX_GENOME.out.chromsizes_ch, blacklist_ch)
 
 	//read mapping
 	idx_bowtie_ch=IDX_GENOME.out.idx_bowtie_ch

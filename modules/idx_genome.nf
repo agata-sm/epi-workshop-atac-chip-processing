@@ -24,7 +24,8 @@ process IDX_GENOME {
     //tuple path("${genomeFasta.baseName}.{1,2,3,4}.bt2"),path("${genomeFasta.baseName}.rev.{1,2}.bt2") , emit: idx_bowtie_ch
     //tuple path("IDX.{1,2,3,4}.bt2"),path("IDX.rev.{1,2}.bt2") , emit: idx_bowtie_ch
 	//path("bowtie2"), emit: idx_bowtie_ch
-	//path("${genomeFasta}.sizes"), emit: chromsizes_ch
+	path("${genomeFasta}.sizes"), emit: chromsizes_ch
+	path("${params.verfile}")
 
     script:
 
@@ -41,17 +42,17 @@ process IDX_GENOME {
     ##mkdir bowtie2
     ##bowtie2-build --threads ${task.cpus} ${args} -f ${genomeFasta} bowtie2/${genomeFasta.baseName}
 
-    #samtools faidx ${genomeFasta}
-    #cut -f 1,2 ${genomeFasta}.fai > ${genomeFasta}.sizes
+    samtools faidx ${genomeFasta}
+    cut -f 1,2 ${genomeFasta}.fai > ${genomeFasta}.sizes
 
 
     echo "Software versions for atac-chip-processing.nf" >${params.verfile}
     date >>${params.verfile}
     echo "process ** ${task.process} **" >>${params.verfile}
-    bowtie2-build --version  >>${params.verfile}
+    bowtie2-build --version
 
-    #echo "reference genome"
-    #echo "${genomeFasta}" >>${params.verfile}
+    echo "reference genome"
+    echo "${genomeFasta}" >>${params.verfile}
     """
 
 
