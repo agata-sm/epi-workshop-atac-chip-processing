@@ -48,10 +48,10 @@ process IDX_GENOME {
     echo "Software versions for atac-chip-processing.nf" >${params.verfile}
     date >>${params.verfile}
     echo "process ** ${task.process} **" >>${params.verfile}
-    bowtie2-build --version
+    bowtie2-build --version  >>${params.verfile}
 
-    echo "reference genome"
-    echo "${genomeFasta}" >>${params.verfile}
+    #echo "reference genome"
+    #echo "${genomeFasta}" >>${params.verfile}
     """
 
 
