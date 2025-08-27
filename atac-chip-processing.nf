@@ -73,7 +73,7 @@ blacklist_ch= Channel.fromPath(params.blacklist, checkIfExists:true)
 		.set { blacklist_ch }
 
 
-idx_bowtie_ch=Channel.fromPath(params.idx_pth, checkIfExists:true)
+//idx_bowtie_ch=Channel.fromPath(params.idx_pth, checkIfExists:true)
 
 
 /////////////////////////////
