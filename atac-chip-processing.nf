@@ -113,7 +113,7 @@ workflow {
 	idx_bowtie_ch=IDX_GENOME.out.idx_bowtie_ch
 		idx_bowtie_ch
 			//.flatten()
-			.collect()
+			//.collect()
 			//.map{[it]}
 			//.view()
 			.set{ idx_bowtie_ch }
@@ -126,9 +126,9 @@ workflow {
 			.set {map_readsPE_ch}
 
 
-	//MAP_READS_GENOME(map_readsPE_ch, idx_bowtie_ch, fa_ch)
+	MAP_READS_GENOME(map_readsPE_ch, idx_bowtie_ch, fa_ch)
 
-	MAP_READS_GENOME(map_readsPE_ch, fa_ch)
+	//MAP_READS_GENOME(map_readsPE_ch, fa_ch)
 
 	BAM_STATS(MAP_READS_GENOME.out.mappedPE_ch)
 
