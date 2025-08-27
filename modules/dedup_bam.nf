@@ -21,7 +21,8 @@ process BAM_DEDUP {
 
 
     output:
-    tuple val(pair_id), path("${pair_id}.bowtie2.dedup.bam"), path("${pair_id}.bowtie2.dedup_metrics"), emit: bam_dedup_ch
+    tuple val(pair_id), path("${pair_id}.bowtie2.dedup.bam"), emit: bam_dedup_ch
+	path("${pair_id}.bowtie2.dedup_metrics")
 
     script:
 
