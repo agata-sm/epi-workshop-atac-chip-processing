@@ -126,7 +126,9 @@ workflow {
 			.set {map_readsPE_ch}
 
 
-	MAP_READS_GENOME(map_readsPE_ch, idx_bowtie_ch, fa_ch)
+	//MAP_READS_GENOME(map_readsPE_ch, idx_bowtie_ch, fa_ch)
+
+	MAP_READS_GENOME(map_readsPE_ch, fa_ch)
 
 	BAM_STATS(MAP_READS_GENOME.out.mappedPE_ch)
 
