@@ -85,7 +85,10 @@ include { IDX_GENOME            } from "$projectDir/modules/idx_genome.nf"
 include { GENOME_BLACKLIST_REGIONS } from "$projectDir/modules/genome_noblcklst.nf"
 include { MAP_READS_GENOME      } from "$projectDir/modules/map_reads_genome.nf"
 include { BAM_STATS            } from "$projectDir/modules/bam_stats.nf"
-//include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
+
+include { BAM_FILT        } from "$projectDir/modules/filt_bam.nf"
+include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
+
 //include { BAM_FILT_BLCK        } from "$projectDir/modules/filt_bam.nf"
 //include { BAM_FILT_MAPQ        } from "$projectDir/modules/filt_mapq_bam.nf"
 
@@ -120,30 +123,28 @@ workflow {
 			.flatten()
 			.collect()
 			.map{[it]}
-	//		.first() //https://github.com/nextflow-io/nextflow/discussions/3954
-			.view()
+			//.view()
 			.set{ idx_bowtie_ch }
 
 
 	map_readsPE_ch=TRIM_READS_PE.out.trimmed_reads_ch
 		map_readsPE_ch
-			//.combine(IDX_GENOME.out.idx_bowtie_ch)
 			.combine(idx_bowtie_ch)
-			.view()
+			//.view()
 			.set {map_readsPE_ch}
-
-
-	//MAP_READS_GENOME(map_readsPE_ch, idx_bowtie_ch, fa_ch)
-
-	//MAP_READS_GENOME(map_readsPE_ch, fa_ch)
 
 	MAP_READS_GENOME(map_readsPE_ch)
 
 	BAM_STATS(MAP_READS_GENOME.out.mappedPE_ch)
 
+
 	//post processing
 
-	//BAM_DEDUP(MAP_READS_GENOME.out.mappedPE_ch)
+	BAM_FILT(MAP_READS_GENOME.out.mappedPE_ch, GENOME_BLACKLIST_REGIONS.out.noblcklst_bed_ch)
+
+	BAM_DEDUP(MAP_READS_GENOME.out.mappedPE_ch)
+
+	//bam_dedup_ch
 
 	//BAM_FILT_BLCK(BAM_DEDUP.out.bam_dedup_ch)
 

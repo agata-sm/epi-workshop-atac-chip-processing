@@ -9,7 +9,7 @@ params.local = ''
 params.verfile="software.versions"
 
 
-process BAM_FILT_BLCK {
+process BAM_FILT {
 
 	label 'error_retry'
     label 'process_medium'
@@ -18,16 +18,15 @@ process BAM_FILT_BLCK {
     //cpus params.threads_bigmem
     scratch true
 
-	container = 'https://depot.galaxyproject.org/singularity/ngsutils%3A0.5.9--py27heb79e2c_4'
+	container = 'https://depot.galaxyproject.org/singularity/mulled-v2-ac74a7f02cebcfcc07d8e8d1d750af9c83b4d45a:f70b31a2db15c023d641c32f433fb02cd04df5a6-0'
 
     input:
     tuple val(pair_id), path(mapped_bam), path(mapped_bam_idx)
+    path(noblcklst_bed)
 
 
     output:
-    tuple val(pair_id), path("${pair_id}.dedup.filt.bam"), emit: bam_filt_ch
-    path("${pair_id}.dedup.filt.blacklist.stats")
-    path("${pair_id}.dedup.filt.mito.stats")
+    tuple val(pair_id), path("${pair_id}.filt.bam"),path("${pair_id}.filt.bam.bai"), emit: bam_filt_ch
 
     script:
 
@@ -35,9 +34,11 @@ process BAM_FILT_BLCK {
 
 
     """
-    bamutils filter ${mapped_bam} ${pair_id}.dedup.filt1.bam -excludebed ${params.blacklist} nostrand >${pair_id}.dedup.filt.blacklist.stats 2>&1
+ 	samtools view ${args} -hbo - ${mapped_bam} | samtools -M -L ${noblcklst_bed} -hbo ${pair_id}.filt.bam -
 
-	bamutils filter ${pair_id}.dedup.filt1.bam ${pair_id}.dedup.filt.bam -excluderef ${params.mt} >${pair_id}.dedup.filt.mito.stats 2>&1
+    samtools index ${pair_id}.filt.bam -o ${pair_id}.filt.bam.bai
+    samtools idxstats ${pair_id}.filt.bam  >${pair_id}.filt.bam.idxstats
     """
 
 }
+

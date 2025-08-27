@@ -21,7 +21,7 @@ process GENOME_BLACKLIST_REGIONS {
     path blacklist
 
     output:
-    path '*.bed'       , emit: bed
+    path "${genomeFasta.baseName}.noblcklst.bed"  , emit: noblcklst_bed_ch
 
     //when:
     //task.ext.when == null || task.ext.when

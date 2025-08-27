@@ -21,26 +21,30 @@ process BAM_DEDUP {
 
 
     output:
-    tuple val(pair_id), path("${pair_id}.bowtie2.dedup.bam"), emit: bam_dedup_ch
-	path("${pair_id}.bowtie2.dedup_metrics")
+    tuple val(pair_id), path("${pair_id}.bowtie2.filt.dedup.bam"),path("${pair_id}.bowtie2.filt.dedup.bam.bai"), emit: bam_dedup_ch
+	path("${pair_id}.bowtie2.filt.dedup_metrics")
 
     script:
 
     def args = task.ext.args ?: ''
 
 
-    """
-    #java -Xmx${task.memory.giga}g -jar picard.jar MarkDuplicates ${args} \
-    # -I ${mapped_bam} \
-    # -O ${pair_id}.bowtie2.dedup.bam -M ${pair_id}.bowtie2.dedup_metrics
-    
+    """   
      picard \\
         -Xmx${task.memory.giga}g \\
         MarkDuplicates \\
         ${args} \\
         --INPUT ${mapped_bam} \\
-        --OUTPUT ${pair_id}.bowtie2.dedup.bam \\
-        --METRICS_FILE ${pair_id}.bowtie2.dedup_metrics
+        --OUTPUT ${pair_id}.bowtie2.filt.dedup.bam \\
+        --METRICS_FILE ${pair_id}.bowtie2.filt.dedup_metrics
+
+     picard \\
+        -Xmx${task.memory.giga}g \\
+         BuildBamIndex \\
+        --INPUT ${mapped_bam} \\
+        --OUTPUT ${pair_id}.bowtie2.filt.dedup.bam.bai
+
     """
 
 }
+
