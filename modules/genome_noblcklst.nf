@@ -11,6 +11,8 @@ params.verfile="software.versions"
 
 process GENOME_BLACKLIST_REGIONS {
 
+	label 'process_low'
+
     container = 'https://depot.galaxyproject.org/singularity/bedtools:2.30.0--hc088bd4_0'
 
     input:
