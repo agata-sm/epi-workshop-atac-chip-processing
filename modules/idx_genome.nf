@@ -19,8 +19,8 @@ process IDX_GENOME {
     path genomeFasta
 
     output:
-    //tuple path("${genomeFasta.baseName}.{1,2,3,4}.bt2"),path("${genomeFasta.baseName}.rev.{1,2}.bt2") , emit: idx_bowtie_ch
-	path("bowtie2"), emit: idx_bowtie_ch
+    tuple path("${genomeFasta.baseName}.{1,2,3,4}.bt2"),path("${genomeFasta.baseName}.rev.{1,2}.bt2") , emit: idx_bowtie_ch
+	//path("bowtie2"), emit: idx_bowtie_ch
 	path("${genomeFasta}.sizes"), emit: chromsizes_ch
 
     script:
@@ -32,10 +32,10 @@ process IDX_GENOME {
     ##gzip -d ${genomeFasta}
     
 
-    #bowtie2-build --threads ${task.cpus} ${args} -f ${genomeFasta} ${genomeFasta.baseName}
+    bowtie2-build --threads ${task.cpus} ${args} -f ${genomeFasta} ${genomeFasta.baseName}
     
-    mkdir bowtie2
-    bowtie2-build --threads ${task.cpus} ${args} -f ${genomeFasta} bowtie2/${genomeFasta.baseName}
+    ##mkdir bowtie2
+    ##bowtie2-build --threads ${task.cpus} ${args} -f ${genomeFasta} bowtie2/${genomeFasta.baseName}
 
     samtools faidx ${genomeFasta}
     cut -f 1,2 ${genomeFasta}.fai > ${genomeFasta}.sizes

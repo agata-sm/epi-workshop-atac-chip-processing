@@ -115,26 +115,26 @@ workflow {
 	GENOME_BLACKLIST_REGIONS(fa_ch, IDX_GENOME.out.chromsizes_ch, blacklist_ch)
 
 	//read mapping
-	//idx_bowtie_ch=IDX_GENOME.out.idx_bowtie_ch
-	//	idx_bowtie_ch
-			//.flatten()
-			//.collect()
-			//.map{[it]}
+	idx_bowtie_ch=IDX_GENOME.out.idx_bowtie_ch
+		idx_bowtie_ch
+			.flatten()
+			.collect()
+			.map{[it]}
 	//		.first() //https://github.com/nextflow-io/nextflow/discussions/3954
-			//.view()
-	//		.set{ idx_bowtie_ch }
+			.view()
+			.set{ idx_bowtie_ch }
 
 
 	map_readsPE_ch=TRIM_READS_PE.out.trimmed_reads_ch
 		map_readsPE_ch
-			//.combine(idx_bowtie_ch)
+			.combine(idx_bowtie_ch)
 			.view()
 			.set {map_readsPE_ch}
 
 
-	MAP_READS_GENOME(map_readsPE_ch, idx_bowtie_ch, fa_ch)
+	//MAP_READS_GENOME(map_readsPE_ch, idx_bowtie_ch, fa_ch)
 
-	//MAP_READS_GENOME(map_readsPE_ch, fa_ch)
+	MAP_READS_GENOME(map_readsPE_ch, fa_ch)
 
 	BAM_STATS(MAP_READS_GENOME.out.mappedPE_ch)
 
