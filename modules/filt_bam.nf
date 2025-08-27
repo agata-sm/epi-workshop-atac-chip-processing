@@ -34,7 +34,7 @@ process BAM_FILT {
 
 
     """
- 	samtools view ${args} -hbo - ${mapped_bam} | samtools view -M -L ${noblcklst_bed} -hbo ${pair_id}.filt.bam -
+ 	samtools view ${args} -M -L ${noblcklst_bed} -hbo ${pair_id}.filt.bam ${mapped_bam}
 
     samtools index ${pair_id}.filt.bam -o ${pair_id}.filt.bam.bai
     samtools idxstats ${pair_id}.filt.bam  >${pair_id}.filt.bam.idxstats

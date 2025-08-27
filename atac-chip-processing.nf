@@ -140,7 +140,7 @@ workflow {
 
 	//post processing
 
-	BAM_FILT(MAP_READS_GENOME.out.mappedPE_ch, GENOME_BLACKLIST_REGIONS.out.noblcklst_bed_ch)
+	BAM_FILT(MAP_READS_GENOME.out.mappedPE_ch, GENOME_BLACKLIST_REGIONS.out.noblcklst_bed_ch.first())
 
 	BAM_DEDUP(BAM_FILT.out.bam_filt_ch)
 
