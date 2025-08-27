@@ -35,8 +35,13 @@ process MAP_READS_GENOME {
 
 
     """
+    INDEX=`find -L ./ -name "*.rev.1.bt2" | sed "s/\\.rev.1.bt2\$//"`
+    [ -z "\$INDEX" ] && INDEX=`find -L ./ -name "*.rev.1.bt2l" | sed "s/\\.rev.1.bt2l\$//"`
+    [ -z "\$INDEX" ] && echo "Bowtie2 index files not found" 1>&2 && exit 1
+
+    bowtie2 -p ${task.cpus} ${args} -x ${INDEX} -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
     
-    bowtie2 -p ${task.cpus} ${args} -x IDX -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
+    ##bowtie2 -p ${task.cpus} ${args} -x IDX -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
 
     samtools sort -T ${pair_id} -o ${pair_id}.sorted.bowtie2.bam ${pair_id}.mapped.bowtie2.bam
     samtools index ${pair_id}.sorted.bowtie2.bam -o ${pair_id}.sorted.bowtie2.bam.bai
