@@ -82,9 +82,9 @@ include { FASTQC_TRIMMED           } from "$projectDir/modules/fastqc_trimmed.nf
 include { IDX_GENOME            } from "$projectDir/modules/idx_genome.nf"
 include { MAP_READS_GENOME      } from "$projectDir/modules/map_reads_genome.nf"
 include { BAM_STATS            } from "$projectDir/modules/bam_stats.nf"
-include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
-include { BAM_FILT_BLCK        } from "$projectDir/modules/filt_bam.nf"
-include { BAM_FILT_MAPQ        } from "$projectDir/modules/filt_mapq_bam.nf"
+//include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
+//include { BAM_FILT_BLCK        } from "$projectDir/modules/filt_bam.nf"
+//include { BAM_FILT_MAPQ        } from "$projectDir/modules/filt_mapq_bam.nf"
 
 
 //BAM_FILT_BLCK
@@ -122,7 +122,7 @@ workflow {
 	map_readsPE_ch=TRIM_READS_PE.out.trimmed_reads_ch
 		map_readsPE_ch
 			//.combine(idx_bowtie_ch)
-			//.view()
+			.view()
 			.set {map_readsPE_ch}
 
 
@@ -132,11 +132,11 @@ workflow {
 
 	//post processing
 
-	BAM_DEDUP(MAP_READS_GENOME.out.mappedPE_ch)
+	//BAM_DEDUP(MAP_READS_GENOME.out.mappedPE_ch)
 
-	BAM_FILT_BLCK(BAM_DEDUP.out.bam_dedup_ch)
+	//BAM_FILT_BLCK(BAM_DEDUP.out.bam_dedup_ch)
 
-	BAM_FILT_MAPQ(BAM_FILT_BLCK.out.bam_filt_ch)
+	//BAM_FILT_MAPQ(BAM_FILT_BLCK.out.bam_filt_ch)
 
 	//bam_filtq_ch
 
