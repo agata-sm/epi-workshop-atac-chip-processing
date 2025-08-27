@@ -35,9 +35,6 @@ process MAP_READS_GENOME {
 
 
     """
-    #bowtie2 -p ${task.cpus} ${args} -x bowtie2/${genomeFasta.baseName} -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
-
-    #bowtie2 -p ${task.cpus} ${args} -x ${genomeFasta.baseName} -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
     
     bowtie2 -p ${task.cpus} ${args} -x IDX -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
 
