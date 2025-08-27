@@ -20,9 +20,9 @@ process MAP_READS_GENOME {
 
 
     input:
-    tuple val(pair_id), path(r1), path(r2), path(idx_bowtie2_ch)
-    //tuple val(pair_id), path(r1), path(r2)
-    //path idx_bowtie2_ch
+    //tuple val(pair_id), path(r1), path(r2), path(idx_bowtie2_ch)
+    tuple val(pair_id), path(r1), path(r2)
+    path idx_bowtie2_ch
     path genomeFasta
 
 
