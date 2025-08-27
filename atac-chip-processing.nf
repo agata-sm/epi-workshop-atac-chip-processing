@@ -83,6 +83,9 @@ include { IDX_GENOME            } from "$projectDir/modules/idx_genome.nf"
 include { MAP_READS_GENOME      } from "$projectDir/modules/map_reads_genome.nf"
 include { BAM_STATS            } from "$projectDir/modules/bam_stats.nf"
 include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
+include { BAM_FILT_BLCK        } from "$projectDir/modules/filt_bam.nf"
+include { BAM_FILT_MAPQ        } from "$projectDir/modules/filt_mapq_bam.nf"
+
 
 //BAM_FILT_BLCK
 
