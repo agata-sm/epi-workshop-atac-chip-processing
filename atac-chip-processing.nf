@@ -73,6 +73,8 @@ blacklist_ch= Channel.fromPath(params.blacklist, checkIfExists:true)
 		.set { blacklist_ch }
 
 
+idx_bowtie_ch=Channel.fromPath(params.idx_pth, checkIfExists:true)
+
 
 /////////////////////////////
 // processes
@@ -113,14 +115,14 @@ workflow {
 	GENOME_BLACKLIST_REGIONS(fa_ch, IDX_GENOME.out.chromsizes_ch, blacklist_ch)
 
 	//read mapping
-	idx_bowtie_ch=IDX_GENOME.out.idx_bowtie_ch
-		idx_bowtie_ch
+	//idx_bowtie_ch=IDX_GENOME.out.idx_bowtie_ch
+	//	idx_bowtie_ch
 			//.flatten()
 			//.collect()
 			//.map{[it]}
-			.first() //https://github.com/nextflow-io/nextflow/discussions/3954
+	//		.first() //https://github.com/nextflow-io/nextflow/discussions/3954
 			//.view()
-			.set{ idx_bowtie_ch }
+	//		.set{ idx_bowtie_ch }
 
 
 	map_readsPE_ch=TRIM_READS_PE.out.trimmed_reads_ch
