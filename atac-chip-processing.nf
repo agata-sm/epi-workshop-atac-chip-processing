@@ -131,7 +131,11 @@ workflow {
 
 	BAM_DEDUP(MAP_READS_GENOME.out.mappedPE_ch)
 
-	//bam_dedup_ch
+	BAM_FILT_BLCK(BAM_DEDUP.out.bam_dedup_ch)
+
+	BAM_FILT_MAPQ(BAM_FILT_BLCK.out.bam_filt_ch)
+
+	//bam_filtq_ch
 
 	// QC
 
