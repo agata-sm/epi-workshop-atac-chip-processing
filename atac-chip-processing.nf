@@ -142,13 +142,17 @@ workflow {
 
 	//post processing
 
-	BAM_FILT(MAP_READS_GENOME.out.mappedPE_ch, GENOME_BLACKLIST_REGIONS.out.noblcklst_bed_ch.first())
+	BAM_DEDUP(MAP_READS_GENOME.out.mappedPE_ch)
 
-	BAM_DEDUP(BAM_FILT.out.bam_filt_ch)
+	BAM_FILT(BAM_DEDUP.out.bam_dedup_ch, GENOME_BLACKLIST_REGIONS.out.noblcklst_bed_ch.first())
+	
+	BAM_STATS2(BAM_FILT.out.bam_filt_ch)
 
-	BAM_STATS2(BAM_DEDUP.out.bam_dedup_ch)
+	BAM_COVERAGE(BAM_FILT.out.bam_filt_ch)
 
 	// QC
+
+
 
 	all_bams_ch=(BAM_DEDUP.out.bam_dedup_ch)
 		all_bams_ch
@@ -183,9 +187,8 @@ workflow {
 
 
 
-	BAM_FINGERPRINT(BAM_STATS2.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
+	BAM_FINGERPRINT(BAM_FILT.out.bam_filt_ch)
 
-	BAM_COVERAGE(BAM_STATS2.out.bam_bai_smpl_dedup_ch)
 
 
 	//BAM_FINGERPRINT(all_bams_ch, all_bais_ch)

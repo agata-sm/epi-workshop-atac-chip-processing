@@ -22,15 +22,14 @@ process BAM_STATS2 {
 
 
     input:
-    tuple val(pair_id), path(mapped_bam)
+    tuple val(pair_id), path(mapped_bam), path(mapped_bam_bai)
 
 
     output:
-    tuple val(pair_id), path("${pair_id}.sorted.bowtie2.bam.stats"),path("${pair_id}.sorted.bowtie2.bam.idxstats"), emit: bam_stats_ch
+    tuple val(pair_id), path("${pair_id}.sorted.bowtie2.bam.stats"),path("${pair_id}.sorted.bowtie2.bam.idxstats")
     //path("${mapped_bam}.bai"), emit: bai_dedup_ch
-    tuple val(pair_id), path("${mapped_bam}.bai"), emit: bai_dedup_ch
     //tuple val(pair_id), path("${mapped_bam}"), emit: bam_dedup_ch
-	tuple val(pair_id), path("${mapped_bam}"), path("${mapped_bam}.bai"), emit: bam_bai_smpl_dedup_ch
+	//tuple val(pair_id), path("${mapped_bam}"), path("${mapped_bam}.bai"), emit: bam_bai_smpl_dedup_ch
 
     script:
 
@@ -38,7 +37,6 @@ process BAM_STATS2 {
 
 
     """
-    samtools index ${mapped_bam} -o ${mapped_bam}.bai
 	samtools idxstats ${mapped_bam}  >${pair_id}.sorted.bowtie2.bam.idxstats
 	samtools stats ${mapped_bam}  >${pair_id}.sorted.bowtie2.bam.stats
     """
