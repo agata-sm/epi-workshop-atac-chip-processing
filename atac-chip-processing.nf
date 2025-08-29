@@ -196,7 +196,7 @@ workflow {
 			//.view()
 			//.filter( ~/bam$/ )
 			//.collect()
-			.map { [1] }
+			.map { bam -> [bam] }
 			.view()
 			.set {ch_all_bams}
 
