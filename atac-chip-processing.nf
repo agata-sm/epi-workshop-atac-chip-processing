@@ -201,8 +201,21 @@ workflow {
 			.view()
 			.set {ch_all_bams}
 
+	ch_all_bais=BAM_FILT.out.bam_filt_ch
+		ch_all_bais
+			//.view()
+			//.filter( ~/bam$/ )
+			//.collect()
+			.map { it[2] }
+			.collect()
+			.view()
+			.set {ch_all_bais}
 
-	//BAM_FINGERPRINT2(BAM_FILT.out.bam_filt_ch)
+//	ch_all_bams_bais=ch_all_bams
+//		ch_all_bams_bais
+
+
+	BAM_FINGERPRINT2(ch_all_bams,ch_all_bais)
 
 
 	//BAM_FINGERPRINT(all_bams_ch, all_bais_ch)
