@@ -89,7 +89,7 @@ include { BAM_STATS            } from "$projectDir/modules/bam_stats.nf"
 include { BAM_FILT        } from "$projectDir/modules/filt_bam.nf"
 include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
 
-include { BAM_STATS as   BAM_STATS2          } from "$projectDir/modules/bam_stats.nf"
+include { BAM_STATS2 } from "$projectDir/modules/bam_stats2.nf"
 
 include { BAM_FINGERPRINT        } from "$projectDir/modules/bam_fingerprint.nf"
 //include { BAM_FILT_MAPQ        } from "$projectDir/modules/filt_mapq_bam.nf"
@@ -150,7 +150,28 @@ workflow {
 
 	// QC
 
-	BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch)
+	all_bams_ch=(BAM_DEDUP.out.bam_dedup_ch)
+		all_bams_ch
+			.collect()
+			.view()
+			.set {all_bams_ch}
+
+
+	all_bais_ch=(BAM_STATS2.out.bai_dedup_ch)
+		all_bais_ch
+			.collect()
+			.view()
+			.set {all_bais_ch}
+
+	all_bams_bais_ch=all_bams_ch
+		all_bams_bais_ch
+			.combine(all_bais_ch)
+			.groupTuple()
+			.view()
+			.set {all_bams_bais_ch}
+
+
+	BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
 
 
 
