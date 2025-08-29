@@ -149,14 +149,14 @@ workflow {
 	BAM_STATS2(BAM_DEDUP.out.bam_dedup_ch)
 
 	// QC
-	all_dedup_bams_ch=BAM_DEDUP.out.bam_dedup_ch
-		all_dedup_bams_ch
+	all_bam_bai_ch=BAM_DEDUP.out.bam_dedup_ch
+		all_bam_bai_ch
 			//.collect()
-			.toList()
+			.toSortedList( )
 			.view()
-			.set {all_dedup_bams_ch}
+			.set {all_bam_bai_ch}
 
-	BAM_FINGERPRINT(all_dedup_bams_ch)
+	BAM_FINGERPRINT(all_bam_bai_ch)
 
 
 
