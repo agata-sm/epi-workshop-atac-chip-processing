@@ -92,7 +92,7 @@ include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
 include { BAM_STATS2 } from "$projectDir/modules/bam_stats2.nf"
 
 include { BAM_FINGERPRINT        } from "$projectDir/modules/bam_fingerprint.nf"
-//include { BAM_FILT_MAPQ        } from "$projectDir/modules/filt_mapq_bam.nf"
+include { BAM_COVERAGE        } from "$projectDir/modules/bam_coverage.nf"
 
 // bam_clustering.nf
 //BAM_FILT_BLCK
@@ -183,11 +183,14 @@ workflow {
 
 
 
-	//BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
+	BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
+
+	BAM_COVERAGE(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
+
 
 	//BAM_FINGERPRINT(all_bams_ch, all_bais_ch)
 
-	BAM_FINGERPRINT(all_bams_ch, all_bais_ch)
+	//BAM_FINGERPRINT(all_bams_ch, all_bais_ch)
 
 }
 

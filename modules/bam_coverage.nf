@@ -6,7 +6,7 @@ params.local = ''
 params.verfile="software.versions"
 
 
-process BAM_FINGERPRINT {
+process MAP_READS_GENOME {
 
 	label 'error_retry'
     label 'process_high'
@@ -16,16 +16,16 @@ process BAM_FINGERPRINT {
     scratch true
 
 
-	container = 'https://depot.galaxyproject.org/singularity/deeptools:3.5.1--py_0'
+    container = 'https://depot.galaxyproject.org/singularity/deeptools:3.5.1--py_0'
+
 
     input:
     tuple val(pair_id), path(mapped_bam)
     tuple val(pair_id), path(mapped_bai)
-    //path(mapped_bai)
 
 
     output:
-    path("${params.projname}.plotFingerprint.pdf")
+    path("${pair_id}.filt.cov_norm1x.bw")
 
     script:
 
@@ -33,10 +33,12 @@ process BAM_FINGERPRINT {
 
 
     """
-    plotFingerprint ${args} -p ${task.cpus} --bamfiles ${mapped_bam} \
-    --labels ${pair_id} \
-    --plotFile ${params.projname}.plotFingerprint.pdf 
+    bamCoverage ${args} -p ${task.cpus} \
+    --normalizeUsing RPGC --effectiveGenomeSize ${params.efGenSize} --outFileFormat bigwig \
+    --bam ${mapped_bam} -outFileName ${pair_id}
     """
+
+
 
 
 }
