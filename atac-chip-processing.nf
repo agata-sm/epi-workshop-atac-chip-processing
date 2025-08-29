@@ -150,19 +150,7 @@ workflow {
 
 	// QC
 
-	// create channel [ meta, [bam], [bai] ]
-	all_bam_bai_ch=BAM_DEDUP.out.bam_dedup_ch
-		all_bam_bai_ch
-			.toList()
-			//.map {it}
-			//.map {
-			//	 meta, bam, bai -> [ meta, bam, bai ]
-			//	}
-			//.collect()
-			.view()
-			.set {all_bam_bai_ch}
-
-	BAM_FINGERPRINT(all_bam_bai_ch)
+	BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch)
 
 
 
