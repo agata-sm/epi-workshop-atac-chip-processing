@@ -21,7 +21,7 @@ process BAM_FILT {
 	container = 'https://depot.galaxyproject.org/singularity/mulled-v2-ac74a7f02cebcfcc07d8e8d1d750af9c83b4d45a:f70b31a2db15c023d641c32f433fb02cd04df5a6-0'
 
     input:
-    tuple val(pair_id), path(mapped_bam), path(mapped_bam_idx)
+    tuple val(pair_id), path(mapped_bam)
     path(noblcklst_bed)
 
 
@@ -37,6 +37,8 @@ process BAM_FILT {
    	mt=${params.mt}
    	mv ${noblcklst_bed} noblcklst_bed.tmp.bed
    	awk -v filt="\$mt" '\$1 != filt { print \$0 }' noblcklst_bed.tmp.bed > ${noblcklst_bed}
+
+    samtools index ${pair_id}.filt.bam -o ${pair_id}.filt1.bam.bai
 
  	samtools view ${args} -M -L ${noblcklst_bed} -hbo ${pair_id}.filt.bam ${mapped_bam}
 
