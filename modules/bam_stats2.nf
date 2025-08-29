@@ -8,7 +8,7 @@ params.local = ''
 params.verfile="software.versions"
 
 
-process BAM_STATS {
+process BAM_STATS2 {
 
 	label 'error_retry'
     label 'process_low'
