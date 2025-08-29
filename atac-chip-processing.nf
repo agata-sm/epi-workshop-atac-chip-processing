@@ -89,10 +89,12 @@ include { BAM_STATS            } from "$projectDir/modules/bam_stats.nf"
 include { BAM_FILT        } from "$projectDir/modules/filt_bam.nf"
 include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
 
-//include { BAM_FILT_BLCK        } from "$projectDir/modules/filt_bam.nf"
+include { BAM_STATS as   BAM_STATS2          } from "$projectDir/modules/bam_stats.nf"
+
+include { BAM_FINGERPRINT        } from "$projectDir/modules/bam_fingerprint.nf"
 //include { BAM_FILT_MAPQ        } from "$projectDir/modules/filt_mapq_bam.nf"
 
-
+// bam_clustering.nf
 //BAM_FILT_BLCK
 
 
@@ -144,16 +146,12 @@ workflow {
 
 	BAM_DEDUP(BAM_FILT.out.bam_filt_ch)
 
-	//bam_dedup_ch
-
-	//BAM_FILT_BLCK(BAM_DEDUP.out.bam_dedup_ch)
-
-	//BAM_FILT_MAPQ(BAM_FILT_BLCK.out.bam_filt_ch)
-
-	//bam_filtq_ch
+	BAM_STATS2(BAM_DEDUP.out.bam_dedup_ch)
 
 	// QC
+	BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch.collect())
 
+	
 
 }
 
