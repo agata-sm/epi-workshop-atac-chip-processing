@@ -38,7 +38,7 @@ process BAM_FILT {
    	mv ${noblcklst_bed} noblcklst_bed.tmp.bed
    	awk -v filt="\$mt" '\$1 != filt { print \$0 }' noblcklst_bed.tmp.bed > ${noblcklst_bed}
 
-    samtools index ${pair_id}.filt.bam -o ${pair_id}.filt1.bam.bai
+    samtools index ${mapped_bam} -o ${mapped_bam}.bai
 
  	samtools view ${args} -M -L ${noblcklst_bed} -hbo ${pair_id}.filt.bam ${mapped_bam}
 
