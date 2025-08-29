@@ -16,8 +16,7 @@ process BAM_FINGERPRINT {
     scratch true
 
 
-	container = 'https://depot.galaxyproject.org/singularity/deeptools%3A3.5.6--pyhdfd78af_0'
-
+	container = 'https://depot.galaxyproject.org/singularity/deeptools:3.5.1--py_0'
 
     input:
     tuple val(pair_id), path(mapped_bam), path(mapped_bam_idx)
