@@ -146,7 +146,7 @@ workflow {
 
 	BAM_DEDUP(BAM_FILT.out.bam_filt_ch)
 
-	BAM_STATS2(BAM_DEDUP.out.bam_dedup1_ch)
+	BAM_STATS2(BAM_DEDUP.out.bam_dedup_ch)
 
 	// QC
 
