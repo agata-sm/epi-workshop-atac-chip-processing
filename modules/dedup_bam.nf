@@ -35,8 +35,8 @@ process BAM_DEDUP {
         MarkDuplicates \\
         ${args} \\
         --INPUT ${mapped_bam} \\
-        --OUTPUT ${pair_id}.bowtie2.filt.dedup.bam \\
-        --METRICS_FILE ${pair_id}.bowtie2.filt.dedup_metrics
+        --OUTPUT ${pair_id}.bowtie2.dedup.bam \\
+        --METRICS_FILE ${pair_id}.bowtie2.dedup_metrics
 
     """
 
