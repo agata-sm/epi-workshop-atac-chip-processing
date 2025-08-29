@@ -39,7 +39,7 @@ process BAM_CORRELATION {
      -o all_bams.filt.npz 
 
     plotCorrelation --corData all_bams.filt.npz \
-    --outFileCorMatrix all_bams.filt.corr_matrix_bin.txt --whatToPlot --corMethod spearman \
+    --outFileCorMatrix all_bams.filt.corr_matrix_bin.txt --whatToPlot heatmap --corMethod spearman \
     --plotFile ${params.projname}.plotCorrelation.pdf 
     """
 
