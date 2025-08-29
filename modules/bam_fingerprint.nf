@@ -16,7 +16,7 @@ process BAM_FINGERPRINT {
     scratch true
 
 
-	container = ''
+	container = 'https://depot.galaxyproject.org/singularity/deeptools%3A3.5.6--pyhdfd78af_0'
 
 
     input:
