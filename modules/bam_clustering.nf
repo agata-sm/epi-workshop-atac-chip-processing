@@ -6,7 +6,7 @@ params.local = ''
 params.verfile="software.versions"
 
 
-process BAM_CLUSTERING {
+process BAM_CORRELATION {
 
     label 'error_retry'
     label 'process_high'

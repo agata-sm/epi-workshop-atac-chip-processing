@@ -95,7 +95,7 @@ include { BAM_FINGERPRINT        } from "$projectDir/modules/bam_fingerprint.nf"
 include { BAM_COVERAGE        } from "$projectDir/modules/bam_coverage.nf"
 
 include { BAM_FINGERPRINT2       } from "$projectDir/modules/bam_fingerprint2.nf"
-include { BAM_CLUSTERING       } from "$projectDir/modules/bam_clustering.nf"
+include { BAM_CORRELATION       } from "$projectDir/modules/bam_clustering.nf"
 
 
 /////////////////////////////
@@ -175,7 +175,7 @@ workflow {
 
 	BAM_FINGERPRINT2(ch_all_bams,ch_all_bais)
 
-	BAM_CLUSTERING(ch_all_bams,ch_all_bais)
+	BAM_CORRELATION(ch_all_bams,ch_all_bais)
 
 
 }
