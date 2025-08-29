@@ -168,7 +168,7 @@ workflow {
 			.set {all_bams_bais_ch}
 
 
-	BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
+	//BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
 
 
 
