@@ -9,7 +9,7 @@ params.verfile="software.versions"
 process BAM_FINGERPRINT {
 
 	label 'error_retry'
-    label 'process_medium'
+    label 'process_high'
     tag "$pair_id" // Adds name to job submission instead of (1), (2) etc.
 
     //cpus params.threads_bigmem

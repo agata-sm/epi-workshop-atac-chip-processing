@@ -149,10 +149,13 @@ workflow {
 	BAM_STATS2(BAM_DEDUP.out.bam_dedup_ch)
 
 	// QC
+
+	// create channel [ meta, [bam], [bai] ]
 	all_bam_bai_ch=BAM_DEDUP.out.bam_dedup_ch
 		all_bam_bai_ch
-			//.collect()
-			.toSortedList( )
+			.collect()
+			.map {
+				 meta, bam, bai -> [ meta, bam, bai ]
 			.view()
 			.set {all_bam_bai_ch}
 
