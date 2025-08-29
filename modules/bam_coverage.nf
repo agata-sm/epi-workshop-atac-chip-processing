@@ -20,7 +20,7 @@ process BAM_COVERAGE {
 
 
     input:
-    tuple val(pair_id), path(mapped_bam),path(mapped_bai)
+    tuple val(pair_id), path(mapped_bam), path(mapped_bai)
     //tuple val(pair_id), path(mapped_bai)
 
 
@@ -35,7 +35,7 @@ process BAM_COVERAGE {
     """
     bamCoverage ${args} -p ${task.cpus} \
     --normalizeUsing RPGC --effectiveGenomeSize ${params.efGenSize} --outFileFormat bigwig \
-    --bam ${mapped_bam} -outFileName ${pair_id}
+    --bam ${mapped_bam} --outFileName ${pair_id}.filt.cov_norm1x.bw
     """
 
 
