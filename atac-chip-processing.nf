@@ -94,6 +94,9 @@ include { BAM_STATS2 } from "$projectDir/modules/bam_stats2.nf"
 include { BAM_FINGERPRINT        } from "$projectDir/modules/bam_fingerprint.nf"
 include { BAM_COVERAGE        } from "$projectDir/modules/bam_coverage.nf"
 
+include { BAM_FINGERPRINT2       } from "$projectDir/modules/bam_fingerprint2.nf"
+
+
 // bam_clustering.nf
 //BAM_FILT_BLCK
 
@@ -151,6 +154,7 @@ workflow {
 	BAM_COVERAGE(BAM_FILT.out.bam_filt_ch)
 
 	// QC
+	BAM_FINGERPRINT(BAM_FILT.out.bam_filt_ch)
 
 
 
@@ -187,8 +191,15 @@ workflow {
 
 
 
-	BAM_FINGERPRINT(BAM_FILT.out.bam_filt_ch)
+	ch_all_bams=BAM_FILT.out.bam_filt_ch
+		ch_all_bams
+			.map[1]{}
+			.collect()
+			.view()
+			.set {ch_all_bams}
 
+
+	//BAM_FINGERPRINT2(BAM_FILT.out.bam_filt_ch)
 
 
 	//BAM_FINGERPRINT(all_bams_ch, all_bais_ch)
