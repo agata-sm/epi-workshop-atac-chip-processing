@@ -156,6 +156,7 @@ workflow {
 			.view()
 			.map {
 				 meta, bam, bai -> [ meta, bam, bai ]
+				}
 			.collect()
 			.view()
 			.set {all_bam_bai_ch}
