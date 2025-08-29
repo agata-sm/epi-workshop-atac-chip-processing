@@ -20,8 +20,6 @@ process BAM_FINGERPRINT2 {
     input:
     path(mapped_bam)
     path(mapped_bai)
-    //tuple val(pair_id), path(mapped_bai)
-    //path(mapped_bai)
 
 
     output:
