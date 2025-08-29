@@ -163,9 +163,16 @@ workflow {
 			.view()
 			.set {all_bais_ch}
 
-	all_bams_bais_ch=all_bams_ch.join(all_bais_ch, by: [0])
+	all_bams_bais_ch=all_bams_ch
+		all_bams_bais_ch
+			.join(all_bais_ch, by: [0], , remainder: true)
+			.map {
+           	 meta, bam, bai ->
+                    [ meta, bam, bai ]
+        	 }
 			.view()
 			.set {all_bams_bais_ch}
+
 
 
 	//BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
