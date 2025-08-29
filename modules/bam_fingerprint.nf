@@ -25,7 +25,7 @@ process BAM_FINGERPRINT {
 
 
     output:
-    path("${params.projname}.plotFingerprint.pdf")
+    path("${pair_id}.plotFingerprint.pdf")
 
     script:
 
@@ -35,7 +35,7 @@ process BAM_FINGERPRINT {
     """
     plotFingerprint ${args} -p ${task.cpus} --bamfiles ${mapped_bam} \
     --labels ${pair_id} \
-    --plotFile ${params.pair_id}.plotFingerprint.pdf 
+    --plotFile ${pair_id}.plotFingerprint.pdf 
     """
 
 
