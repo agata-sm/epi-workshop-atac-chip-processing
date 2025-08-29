@@ -33,7 +33,7 @@ process BAM_FINGERPRINT {
 
     """
     plotFingerprint ${args} -p ${task.cpus} --bamfiles ${mapped_bam} \
-    --labels ${pair.id} \
+    --labels ${pair_id} \
     --plotFile ${params.projname}.plotFingerprint.pdf 
     """
 
