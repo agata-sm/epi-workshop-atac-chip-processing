@@ -163,7 +163,7 @@ workflow {
 			.view()
 			.set {all_bais_ch}
 
-	all_bams_bais_ch=all_bams_ch.join(all_bais_ch, by: [0]),
+	all_bams_bais_ch=all_bams_ch.join(all_bais_ch, by: [0])
 			.view()
 			.set {all_bams_bais_ch}
 
