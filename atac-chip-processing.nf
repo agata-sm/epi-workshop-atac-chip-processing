@@ -195,7 +195,7 @@ workflow {
 		ch_all_bams
 			.view()
 			.filter( ~/bam$/ )
-			.collect()
+			//.collect()
 			.view()
 			.set {ch_all_bams}
 
