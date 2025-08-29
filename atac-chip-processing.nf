@@ -183,7 +183,7 @@ workflow {
 
 
 
-	BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
+	BAM_FINGERPRINT(BAM_STATS2.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
 
 	BAM_COVERAGE(BAM_STATS2.out.bam_bai_smpl_dedup_ch)
 
