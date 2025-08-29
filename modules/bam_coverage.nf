@@ -6,7 +6,7 @@ params.local = ''
 params.verfile="software.versions"
 
 
-process MAP_READS_GENOME {
+process BAM_COVERAGE {
 
 	label 'error_retry'
     label 'process_high'
