@@ -193,7 +193,7 @@ workflow {
 
 	ch_all_bams=BAM_FILT.out.bam_filt_ch
 		ch_all_bams
-			.map[1]{}
+			.map{[1]}
 			.collect()
 			.view()
 			.set {ch_all_bams}
