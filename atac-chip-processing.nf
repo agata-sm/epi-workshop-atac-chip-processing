@@ -86,6 +86,8 @@ include { GENOME_BLACKLIST_REGIONS } from "$projectDir/modules/genome_noblcklst.
 include { MAP_READS_GENOME      } from "$projectDir/modules/map_reads_genome.nf"
 include { BAM_STATS            } from "$projectDir/modules/bam_stats.nf"
 
+include { BAM_PAIRED_FILT } from "$projectDir/modules/bam_file_pp.nf"
+
 include { BAM_FILT        } from "$projectDir/modules/filt_bam.nf"
 include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
 
@@ -142,7 +144,9 @@ workflow {
 
 	//post processing
 
-	BAM_DEDUP(MAP_READS_GENOME.out.mappedPE_ch)
+	BAM_PAIRED_FILT(MAP_READS_GENOME.out.mappedPE_ch)
+
+	BAM_DEDUP(BAM_PAIRED_FILT.out.bam_ch)
 
 	BAM_FILT(BAM_DEDUP.out.bam_dedup_ch, GENOME_BLACKLIST_REGIONS.out.noblcklst_bed_ch.first())
 	
