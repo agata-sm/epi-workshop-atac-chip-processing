@@ -154,18 +154,18 @@ workflow {
 
 
 
-	all_bams_ch=(BAM_DEDUP.out.bam_dedup_ch)
-		all_bams_ch
-			.collect()
-			//.view()
-			.set {all_bams_ch}
+	// all_bams_ch=(BAM_DEDUP.out.bam_dedup_ch)
+	// 	all_bams_ch
+	// 		.collect()
+	// 		//.view()
+	// 		.set {all_bams_ch}
 
 
-	all_bais_ch=(BAM_STATS2.out.bai_dedup_ch)
-		all_bais_ch
-			.collect()
-			//.view()
-			.set {all_bais_ch}
+	// all_bais_ch=(BAM_STATS2.out.bai_dedup_ch)
+	// 	all_bais_ch
+	// 		.collect()
+	// 		//.view()
+	// 		.set {all_bais_ch}
 
 	//all_bams_bais_ch=all_bams_ch
 	//	all_bams_bais_ch
