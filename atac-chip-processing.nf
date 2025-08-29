@@ -95,10 +95,7 @@ include { BAM_FINGERPRINT        } from "$projectDir/modules/bam_fingerprint.nf"
 include { BAM_COVERAGE        } from "$projectDir/modules/bam_coverage.nf"
 
 include { BAM_FINGERPRINT2       } from "$projectDir/modules/bam_fingerprint2.nf"
-
-
-// bam_clustering.nf
-//BAM_FILT_BLCK
+include { BAM_CLUSTERING       } from "$projectDir/modules/bam_clustering.nf"
 
 
 /////////////////////////////
@@ -156,41 +153,6 @@ workflow {
 	// QC
 	BAM_FINGERPRINT(BAM_FILT.out.bam_filt_ch)
 
-
-
-	// all_bams_ch=(BAM_DEDUP.out.bam_dedup_ch)
-	// 	all_bams_ch
-	// 		.collect()
-	// 		//.view()
-	// 		.set {all_bams_ch}
-
-
-	// all_bais_ch=(BAM_STATS2.out.bai_dedup_ch)
-	// 	all_bais_ch
-	// 		.collect()
-	// 		//.view()
-	// 		.set {all_bais_ch}
-
-	//all_bams_bais_ch=all_bams_ch
-	//	all_bams_bais_ch
-	//		.join(all_bais_ch)
-		 	//.groupTuple()
-	//	 	.view()
-	//	 	.set {all_bams_bais_ch}
-
-
-	// all_bams_bais_ch=all_bams_ch
-	// 	all_bams_bais_ch
-	// 		.join(all_bais_ch, by: [0], remainder: true)
-	// 		.map {
-    //        	 meta, bam, bai ->
-    //                 [ meta, bam, bai ]
-    //     	 }
-	// 		.view()
-	// 		.set {all_bams_bais_ch}
-
-
-
 	ch_all_bams=BAM_FILT.out.bam_filt_ch
 		ch_all_bams
 			//.view()
@@ -211,16 +173,10 @@ workflow {
 			.view()
 			.set {ch_all_bais}
 
-//	ch_all_bams_bais=ch_all_bams
-//		ch_all_bams_bais
-
-
 	BAM_FINGERPRINT2(ch_all_bams,ch_all_bais)
 
+	BAM_CLUSTERING(ch_all_bams,ch_all_bais)
 
-	//BAM_FINGERPRINT(all_bams_ch, all_bais_ch)
-
-	//BAM_FINGERPRINT(all_bams_ch, all_bais_ch)
 
 }
 

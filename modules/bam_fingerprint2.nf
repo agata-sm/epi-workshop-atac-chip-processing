@@ -10,7 +10,6 @@ process BAM_FINGERPRINT2 {
 
 	label 'error_retry'
     label 'process_high'
-    tag "$pair_id" // Adds name to job submission instead of (1), (2) etc.
 
     //cpus params.threads_bigmem
     scratch true
