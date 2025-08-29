@@ -165,10 +165,11 @@ workflow {
 
 	all_bams_bais_ch=all_bams_ch
 		all_bams_bais_ch
-		 .collect()
-		 .groupTuple()
-		 .view()
-		 .set {all_bams_bais_ch}
+			.join(all_bais_ch)
+		 	//.groupTuple()
+		 	.view()
+		 	.set {all_bams_bais_ch}
+
 
 	// all_bams_bais_ch=all_bams_ch
 	// 	all_bams_bais_ch
