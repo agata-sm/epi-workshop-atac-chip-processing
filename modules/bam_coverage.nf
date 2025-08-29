@@ -20,8 +20,8 @@ process BAM_COVERAGE {
 
 
     input:
-    tuple val(pair_id), path(mapped_bam)
-    tuple val(pair_id), path(mapped_bai)
+    tuple val(pair_id), path(mapped_bam),path(mapped_bai)
+    //tuple val(pair_id), path(mapped_bai)
 
 
     output:

@@ -29,6 +29,8 @@ process BAM_STATS2 {
     tuple val(pair_id), path("${pair_id}.sorted.bowtie2.bam.stats"),path("${pair_id}.sorted.bowtie2.bam.idxstats"), emit: bam_stats_ch
     //path("${mapped_bam}.bai"), emit: bai_dedup_ch
     tuple val(pair_id), path("${mapped_bam}.bai"), emit: bai_dedup_ch
+    tuple val(pair_id), path("${mapped_bam}"), emit: bam_dedup_ch
+	tuple val(pair_id), path("${mapped_bam}.bai"), path("${mapped_bam}.bai"), emit: bam_bai_smpl_dedup_ch
 
     script:
 

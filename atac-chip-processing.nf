@@ -146,7 +146,7 @@ workflow {
 
 	BAM_DEDUP(BAM_FILT.out.bam_filt_ch)
 
-	BAM_STATS2(BAM_DEDUP.out.bam_dedup_ch)
+	BAM_STATS2(BAM_DEDUP.out.bam_dedup1_ch)
 
 	// QC
 
@@ -185,7 +185,7 @@ workflow {
 
 	BAM_FINGERPRINT(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
 
-	BAM_COVERAGE(BAM_DEDUP.out.bam_dedup_ch, BAM_STATS2.out.bai_dedup_ch)
+	BAM_COVERAGE(BAM_STATS2.out.bam_bai_smpl_dedup_ch)
 
 
 	//BAM_FINGERPRINT(all_bams_ch, all_bais_ch)
