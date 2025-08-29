@@ -6,7 +6,7 @@ params.local = ''
 params.verfile="software.versions"
 
 
-process BAM_FINGERPRINT {
+process BAM_FINGERPRINT2 {
 
 	label 'error_retry'
     label 'process_high'
