@@ -19,7 +19,8 @@ process BAM_FINGERPRINT {
 	container = 'https://depot.galaxyproject.org/singularity/deeptools:3.5.1--py_0'
 
     input:
-    tuple val(pair_id), path(mapped_bam), path(mapped_bam_idx)
+    tuple val(pair_id), path(mapped_bam)
+    tuple val(pair_id), path(mapped_bai)
 
 
     output:
