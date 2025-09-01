@@ -27,7 +27,8 @@ process BAM_CORRELATION {
     output:
     path("${params.projname}.plotCorrelation.spearman.pdf")
     path("${params.projname}.plotCorrelation.pearson.pdf")
-    path("${params.projname}.all_bams.filt.corr_matrix_bin.txt")
+    path("${params.projname}.all_bams.filt.corr_matrix_bin.pearson.txt")
+    path("${params.projname}.all_bams.filt.corr_matrix_bin.spearman.txt")
     path("${params.projname}.all_bams.filt.npz")
 
     script:
@@ -38,14 +39,14 @@ process BAM_CORRELATION {
 
     """
     multiBamSummary bins  ${args} -p ${task.cpus} --bamfiles ${mapped_bam} \
-     -o all_bams.filt.npz 
+     -o ${params.projname}.all_bams.filt.npz
 
     plotCorrelation ${args2} --corData all_bams.filt.npz \
-    --outFileCorMatrix all_bams.filt.corr_matrix_bin.txt --whatToPlot heatmap --corMethod spearman \
+    --outFileCorMatrix ${params.projname}.all_bams.filt.corr_matrix_bin.spearman.txt --whatToPlot heatmap --corMethod spearman \
     --plotFile ${params.projname}.plotCorrelation.spearman.pdf 
 
     plotCorrelation ${args2} --corData all_bams.filt.npz \
-    --outFileCorMatrix all_bams.filt.corr_matrix_bin.txt --whatToPlot heatmap --corMethod pearson \
+    --outFileCorMatrix ${params.projname}.all_bams.filt.corr_matrix_bin.pearson.txt --whatToPlot heatmap --corMethod pearson \
     --plotFile ${params.projname}.plotCorrelation.pearson.pdf 
     """
 
