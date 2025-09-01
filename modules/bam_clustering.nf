@@ -41,11 +41,11 @@ process BAM_CORRELATION {
     multiBamSummary bins  ${args} -p ${task.cpus} --bamfiles ${mapped_bam} \
      -o ${params.projname}.all_bams.filt.npz
 
-    plotCorrelation ${args2} --corData all_bams.filt.npz \
+    plotCorrelation ${args2} --corData ${params.projname}.all_bams.filt.npz \
     --outFileCorMatrix ${params.projname}.all_bams.filt.corr_matrix_bin.spearman.txt --whatToPlot heatmap --corMethod spearman \
     --plotFile ${params.projname}.plotCorrelation.spearman.pdf 
 
-    plotCorrelation ${args2} --corData all_bams.filt.npz \
+    plotCorrelation ${args2} --corData ${params.projname}.all_bams.filt.npz \
     --outFileCorMatrix ${params.projname}.all_bams.filt.corr_matrix_bin.pearson.txt --whatToPlot heatmap --corMethod pearson \
     --plotFile ${params.projname}.plotCorrelation.pearson.pdf 
     """
