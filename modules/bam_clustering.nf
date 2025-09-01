@@ -25,22 +25,28 @@ process BAM_CORRELATION {
 
 
     output:
-    path("${params.projname}.plotCorrelation.pdf")
-    path("all_bams.filt.corr_matrix_bin.txt")
-    path("all_bams.filt.npz")
+    path("${params.projname}.plotCorrelation.spearman.pdf")
+    path("${params.projname}.plotCorrelation.pearson.pdf")
+    path("${params.projname}.all_bams.filt.corr_matrix_bin.txt")
+    path("${params.projname}.all_bams.filt.npz")
 
     script:
 
     def args = task.ext.args ?: ''
+    def args2 = task.ext.args2 ?: ''
 
 
     """
-    multiBamSummary bins -p ${task.cpus} --bamfiles ${mapped_bam} \
+    multiBamSummary bins  ${args} -p ${task.cpus} --bamfiles ${mapped_bam} \
      -o all_bams.filt.npz 
 
-    plotCorrelation --corData all_bams.filt.npz \
+    plotCorrelation ${args2} --corData all_bams.filt.npz \
     --outFileCorMatrix all_bams.filt.corr_matrix_bin.txt --whatToPlot heatmap --corMethod spearman \
-    --plotFile ${params.projname}.plotCorrelation.pdf 
+    --plotFile ${params.projname}.plotCorrelation.spearman.pdf 
+
+    plotCorrelation ${args2} --corData all_bams.filt.npz \
+    --outFileCorMatrix all_bams.filt.corr_matrix_bin.txt --whatToPlot heatmap --corMethod pearson \
+    --plotFile ${params.projname}.plotCorrelation.pearson.pdf 
     """
 
 }
