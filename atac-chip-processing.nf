@@ -85,19 +85,15 @@ include { IDX_GENOME            } from "$projectDir/modules/idx_genome.nf"
 include { GENOME_BLACKLIST_REGIONS } from "$projectDir/modules/genome_noblcklst.nf"
 include { MAP_READS_GENOME      } from "$projectDir/modules/map_reads_genome.nf"
 include { BAM_STATS            } from "$projectDir/modules/bam_stats.nf"
-
 include { BAM_PAIRED_FILT } from "$projectDir/modules/bam_file_pp.nf"
-
 include { BAM_FILT        } from "$projectDir/modules/filt_bam.nf"
 include { BAM_DEDUP            } from "$projectDir/modules/dedup_bam.nf"
-
 include { BAM_STATS2 } from "$projectDir/modules/bam_stats2.nf"
-
 include { BAM_FINGERPRINT        } from "$projectDir/modules/bam_fingerprint.nf"
 include { BAM_COVERAGE        } from "$projectDir/modules/bam_coverage.nf"
-
 include { BAM_FINGERPRINT2       } from "$projectDir/modules/bam_fingerprint2.nf"
 include { BAM_CORRELATION       } from "$projectDir/modules/bam_clustering.nf"
+include { BAM_FRAG_LEN } from ="$projectDir/modules/bam_fragmentsize.nf"
 
 
 /////////////////////////////
@@ -181,6 +177,7 @@ workflow {
 
 	BAM_CORRELATION(ch_all_bams,ch_all_bais)
 
+	BAM_FRAG_LEN(BAM_FILT.out.bam_filt_ch)
 
 }
 
