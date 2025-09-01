@@ -93,7 +93,7 @@ include { BAM_FINGERPRINT        } from "$projectDir/modules/bam_fingerprint.nf"
 include { BAM_COVERAGE        } from "$projectDir/modules/bam_coverage.nf"
 include { BAM_FINGERPRINT2       } from "$projectDir/modules/bam_fingerprint2.nf"
 include { BAM_CORRELATION       } from "$projectDir/modules/bam_clustering.nf"
-include { BAM_FRAG_LEN } from ="$projectDir/modules/bam_fragmentsize.nf"
+include { BAM_FRAG_LEN } from "$projectDir/modules/bam_fragmentsize.nf"
 
 
 /////////////////////////////
