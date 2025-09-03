@@ -7,10 +7,10 @@ Pipeline for NBIS epigenomics workshop ATAC and ChIP data preparation
 ### Rackham
 
 ```
-export NXF_HOME="/sw/courses/epigenomics/2025/atacseq/nxf"
-export NXF_SINGULARITY_CACHEDIR="/sw/courses/epigenomics/2025/atacseq/pipeline/containers"
+export NXF_HOME="/sw/courses/epigenomics/2025/software/nxf"
+export NXF_SINGULARITY_CACHEDIR="/sw/courses/epigenomics/2025/software/pipeline/containers"
 
-pipelineDir="/sw/courses/epigenomics/2025/atacseq/pipeline/epi-workshop-atac-chip-processing"
+pipelineDir="/sw/courses/epigenomics/2025/software/pipeline/epi-workshop-atac-chip-processing"
 
 module load java/OpenJDK_22+36
 
