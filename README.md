@@ -18,3 +18,11 @@ ${NXF_HOME}/nextflow run "${pipelineDir}/atac-chip-processing.nf" \
         -c "${pipelineDir}/configs/rackham.config" -c atac-chip-proc.config \
         -profile rackham
 ```
+
+
+run under:
+
+```
+N E X T F L O W   ~  version 25.04.6
+```
+
