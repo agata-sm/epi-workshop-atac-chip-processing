@@ -26,7 +26,7 @@ process BAM_SORT {
 
 
     output:
-    tuple val(pair_id), path("${pair_id}.sorted.bam"),path("${pair_id}.sorted.bam.bai"), emit: bam_sorted_ch
+    tuple val(pair_id), path("${pair_id}.sorted.bowtie2.bam"),path("${pair_id}.sorted.bowtie2.bam.bai"), emit: bam_sorted_ch
 
     script:
 
