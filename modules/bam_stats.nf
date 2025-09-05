@@ -34,11 +34,8 @@ process BAM_STATS {
 
 
     """
-    samtools sort -T ${pair_id} -o ${pair_id}.sorted.bowtie2.bam ${mapped_bam}
-    samtools index ${pair_id}.sorted.bowtie2.bam -o ${pair_id}.sorted.bowtie2.bam.bai
-
-	samtools idxstats {pair_id}.sorted.bowtie2.bam  >${pair_id}.sorted.bowtie2.bam.idxstats
-	samtools stats {pair_id}.sorted.bowtie2.bam  >${pair_id}.sorted.bowtie2.bam.stats
+	samtools idxstats ${mapped_bam}  >${pair_id}.sorted.bowtie2.bam.idxstats
+	samtools stats ${mapped_bam}  >${pair_id}.sorted.bowtie2.bam.stats
     """
 
 }
