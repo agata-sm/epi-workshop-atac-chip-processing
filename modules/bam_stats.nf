@@ -22,7 +22,7 @@ process BAM_STATS {
 
 
     input:
-    tuple val(pair_id), path(mapped_bam)
+    tuple val(pair_id), path(mapped_bam), path(mapped_bam_idx)
 
 
     output:
