@@ -94,6 +94,9 @@ include { BAM_COVERAGE        } from "$projectDir/modules/bam_coverage.nf"
 include { BAM_FINGERPRINT2       } from "$projectDir/modules/bam_fingerprint2.nf"
 include { BAM_CORRELATION       } from "$projectDir/modules/bam_clustering.nf"
 include { BAM_FRAG_LEN } from "$projectDir/modules/bam_fragmentsize.nf"
+include { BAM_SORT } from "$projectDir/modules/sort_bam.nf"
+
+
 
 
 /////////////////////////////
@@ -135,12 +138,14 @@ workflow {
 
 	MAP_READS_GENOME(map_readsPE_ch)
 
-	BAM_STATS(MAP_READS_GENOME.out.mappedPE_ch)
+	BAM_SORT(MAP_READS_GENOME.out.mappedPE_ch)
+
+	BAM_STATS(BAM_SORT.out.bam_sorted_ch)
 
 
 	//post processing
 
-	BAM_PAIRED_FILT(MAP_READS_GENOME.out.mappedPE_ch)
+	BAM_PAIRED_FILT(BAM_SORT.out.bam_sorted_ch)
 
 	BAM_DEDUP(BAM_PAIRED_FILT.out.bam_ch)
 
