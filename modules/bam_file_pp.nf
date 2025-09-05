@@ -22,7 +22,7 @@ process BAM_PAIRED_FILT {
 	container = 'https://depot.galaxyproject.org/singularity/mulled-v2-ac74a7f02cebcfcc07d8e8d1d750af9c83b4d45a:f70b31a2db15c023d641c32f433fb02cd04df5a6-0'
 
     input:
-    tuple val(pair_id), path(mapped_bam), path(mapped_bam_idx)
+    tuple val(pair_id), path(mapped_bam)
 
 
     output:
@@ -34,6 +34,9 @@ process BAM_PAIRED_FILT {
 
 
     """
+    samtools sort -T ${pair_id} -o ${pair_id}.sorted.bowtie2.bam ${mapped_bam}
+    samtools index ${pair_id}.sorted.bowtie2.bam -o ${pair_id}.sorted.bowtie2.bam.bai
+
  	samtools view ${args} -hbo ${pair_id}.ppfilt.bam ${mapped_bam}
 
     samtools index ${pair_id}.ppfilt.bam -o ${pair_id}.ppfilt.bam.bai

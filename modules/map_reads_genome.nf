@@ -9,7 +9,7 @@ params.verfile="software.versions"
 process MAP_READS_GENOME {
 
 	label 'error_retry'
-    label 'process_high'
+    //label 'process_high'
     tag "$pair_id" // Adds name to job submission instead of (1), (2) etc.
 
     //cpus params.threads_bigmem
@@ -24,7 +24,7 @@ process MAP_READS_GENOME {
 
 
     output:
-    tuple val(pair_id), path("${pair_id}.sorted.bowtie2.bam"), path("${pair_id}.sorted.bowtie2.bam.bai"), emit: mappedPE_ch
+    tuple val(pair_id), path("${pair_id}.mapped.bowtie2.bam"), emit: mappedPE_ch
 
     script:
 
@@ -37,9 +37,6 @@ process MAP_READS_GENOME {
     [ -z "\$INDEX" ] && echo "Bowtie2 index files not found" 1>&2 && exit 1
 
     bowtie2 -p ${task.cpus} ${args} -x \${INDEX} -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
-    
-    samtools sort -T ${pair_id} -o ${pair_id}.sorted.bowtie2.bam ${pair_id}.mapped.bowtie2.bam
-    samtools index ${pair_id}.sorted.bowtie2.bam -o ${pair_id}.sorted.bowtie2.bam.bai
     """
 
 }
