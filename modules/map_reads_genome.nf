@@ -25,6 +25,7 @@ process MAP_READS_GENOME {
 
     output:
     tuple val(pair_id), path("${pair_id}.mapped.bowtie2.bam"), emit: mappedPE_ch
+    path("${prefix}.bowtie2.log")
 
     script:
 
@@ -36,7 +37,7 @@ process MAP_READS_GENOME {
     [ -z "\$INDEX" ] && INDEX=`find -L ./ -name "*.rev.1.bt2l" | sed "s/\\.rev.1.bt2l\$//"`
     [ -z "\$INDEX" ] && echo "Bowtie2 index files not found" 1>&2 && exit 1
 
-    bowtie2 -p ${task.cpus} ${args} -x \${INDEX} -1 ${r1} -2 ${r2}  | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
+    bowtie2 -p ${task.cpus} ${args} -x \${INDEX} -1 ${r1} -2 ${r2} 2> >(tee ${prefix}.bowtie2.log >&2) | samtools view -hbo ${pair_id}.mapped.bowtie2.bam - 
     """
 
 }
